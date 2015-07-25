@@ -23,6 +23,7 @@
   "dependencies": {
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
+    "node-oauth": "^0.1.3",
     "redis": "^0.12.1"
   }
 }
