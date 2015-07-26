@@ -1,7 +1,7 @@
 {
-  "name": "uber-or-whip",
+  "name": "uber-charles",
   "version": "1.0.0",
-  "description": "Should you use uber or buy a whip?",
+  "description": "Your personal assistant for Uber",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "uber",
-    "whip"
+    "charles"
   ],
   "author": "UberOrWhip",
   "license": "MIT",
@@ -22,9 +22,19 @@
   "homepage": "https://github.com/UberOrWhip/UberOrWhip#readme",
   "dependencies": {
     "body-parser": "^1.13.2",
+    "eventful-react": "^1.1.0",
     "express": "^4.13.1",
+    "morgan": "^1.6.1",
     "node-oauth": "^0.1.3",
+    "react": "^0.13.3",
     "redis": "^0.12.1",
     "superagent": "^1.2.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^3.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-nodemon": "^0.4.0",
+    "reactify": "^1.1.1"
   }
 }
