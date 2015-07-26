@@ -21,7 +21,7 @@ module.exports = function(token, product, start_latitude, start_longitude, end_l
     rideData.surge_confirmation_id = surgeId;
   }
 
-  request.post('https://api.uber.com/v1/requests')
+  request.post('https://sandbox-api.uber.com/v1/requests')
   .set('Authorization', 'BEARER ' + token)
   .send(rideData)
   .end(function(err, response) {

@@ -8,7 +8,7 @@ module.exports = function(product, start_latitude, start_longitude, token, callb
     'uberXL': '821415d8-3bd5-4e27-9604-194e4359a449',
     'uberX': 'a1111c8c-c720-46c3-8534-2fcdd730040d',
   };
-  request.post('https://api.uber.com/v1/requests/estimate')
+  request.post('https://sandbox-api.uber.com/v1/requests/estimate')
   .set('Authorization', 'BEARER ' + token)
   .send({
     'product_id': products[product],
