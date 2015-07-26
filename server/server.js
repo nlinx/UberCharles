@@ -37,7 +37,7 @@ app.use(express.static(__dirname + '/public'));
 
 //Auth
 app.get('/login', function(req, res) {
-  var scopes = 'profile history history_lite request request_receipt'; 
+  var scopes = 'profile history history_lite request request_receipt';
   res.redirect('https://login.uber.com/oauth/authorize?client_id=' + config.UBER_CLIENT_ID + '&response_type=code&scope=' + scopes);
 });
 
@@ -77,7 +77,13 @@ app.get('/map', function(req, res) {
 });
 
 var requestRide = require('./route_handlers/requestRide');
+var cancelRide = require('./route_handlers/cancelRide');
+var estimateRide = require('./route_handlers/estimateRide');
+// var surge = require('./route_handlers/surge');
 app.post('/requestride', requestRide);
+app.get('/cancelride', cancelRide);
+app.post('/estimate', estimateRide);
+// app.get('/surge', surge);
 
 app.post('/webhook', function(req, res) {
   console.log(req);

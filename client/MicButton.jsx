@@ -33,13 +33,23 @@ var MicButton = Eventful.createClass({
       util.getGeolocation(function(coordinates) {
         $.ajax({
           url: '/requestride',
-          type: "POST",
+          type: 'POST',
           data: {
             text: text.transcript,
             coordinates: coordinates
           },
           success: function(data, status, xhr) {
             pollForMap(data.requestId);
+            var startRide = that.props.startRide;
+            console.log(data);
+            if (data) {
+              util.speak('Your Uber has been called. Please stand by.');
+              startRide(data.href, data.request_id);
+            } else if (data === '') {
+              util.speak('Incorrect information was stated. Please try again.')
+            } else {
+              util.speak('My name is not Chiles. I am Sir Charles the Third of Wales, half brother of the Duke of England and son of the Bishop of Saint Petersberg');
+            }
           }
         });
         console.log(text);

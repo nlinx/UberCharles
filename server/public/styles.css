@@ -16,6 +16,7 @@ body {
 }
 
 .mapFrame {
+  margin-top: 1%;
   display: inline-block;
   width: 80%;
   height: 600px;
