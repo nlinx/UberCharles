@@ -16,7 +16,15 @@ var MicButton = Eventful.createClass({
           },
           success: function(data, status, xhr) {
             var startRide = that.props.startRide;
-            startRide(data.href, data.request_id);
+            console.log(data);
+            if (data) {
+              util.speak('Your Uber has been called. Please stand by.');
+              startRide(data.href, data.request_id);
+            } else if (data === '') {
+              util.speak('Incorrect information was stated. Please try again.')
+            } else {
+              util.speak('My name is not Chiles. I am Sir Charles the Third of Wales, half brother of the Duke of England and son of the Bishop of Saint Petersberg');
+            }
           }
         });
         console.log(text);

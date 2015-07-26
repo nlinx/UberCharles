@@ -8,7 +8,7 @@ module.exports = function(req, res, callback) {
   console.log('token is: ', req.session.token);
   //convert destination to end longitude and latitude with nathans function
   if (req.body.text.indexOf('Charles') === -1) {
-    return res.send('Charles did not answer');
+    return res.send(false);
   }
 
   var text = req.body.text;
@@ -46,7 +46,7 @@ module.exports = function(req, res, callback) {
       });
     }
     else {
-      return res.send('Charles did not understand you!');
+      return res.send(null);
     }
   });
 
