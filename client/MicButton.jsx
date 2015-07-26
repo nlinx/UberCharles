@@ -78,7 +78,7 @@ var MicButton = Eventful.createClass({
     });
   },
   render: function() {
-    return <div className="buttonMic btn btn-primary" onClick={this.clickHandler}>Tell Charles</div>;
+    return <div><div className="gn" onClick={this.clickHandler}><div className="mc"></div></div>Hi, I'm Charles. Where are we going today?</div>
   }
 });
 

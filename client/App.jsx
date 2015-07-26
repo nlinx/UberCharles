@@ -64,12 +64,6 @@ var App = Eventful.createClass({
           <MicButton loadingFunc={this.loading} notLoadingFunc={this.notLoading} cancelFunc={this.cancelable} notCancelFunc={this.notCancelable} startRide={this.startRide}/>
           <CancelButton requestId={this.state.requestId} notCancelFunc={this.notCancelable} stopRide={this.stopRide} cancelable={this.state.cancelable}/>
           <div>
-            <EstimateButton setEstimates={this.setEstimates} />
-          </div>
-          <div>
-            <PricingInfo surge={this.state.surge} price={this.state.price} />
-          </div>
-          <div>
             <LoadingGif loading={this.state.loading}/>
           </div>
           <div className='map-container'>
