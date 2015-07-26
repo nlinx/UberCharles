@@ -39,18 +39,20 @@ module.exports = function(req, res, callback) {
         if (userRequest.time === 0) {
           requestRide(req.session.token, 'uberBlack', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
             console.log(uberResponse);
-            pollForMap(uberResponse.request_id, req.session.token, function(map) {
-              res.send(map);
-            });
+            res.send({request_id: uberResponse.request_id});
+            // pollForMap(uberResponse.request_id, req.session.token, function(map) {
+              // res.send(map);
+            // });
           });
         }
         else {
           scheduleHandler.minutes(userRequest.time, function() {
             requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
               console.log(uberResponse);
-              pollForMap(uberResponse.request_id, req.session.token, function(map) {
-                res.send(map);
-              });
+              res.send({requestId: uberResponse.request_id});
+              // pollForMap(uberResponse.request_id, req.session.token, function(map) {
+              //   res.send(map);
+              // });
             });
           });
         }

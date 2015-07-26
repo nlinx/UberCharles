@@ -4,6 +4,23 @@ var util = require('./util');
 
 var MicButton = Eventful.createClass({
   clickHandler: function() {
+    var pollForMap = function(requestId) {
+      $.ajax({
+        url: '/map?request_id=' + requestId,
+        type: "GET",
+        success: function(data, status, xhr) {
+          if (xhr.status === 400) {
+            setTimeout(function() {
+              pollForMap(requestId);
+            },5);
+          }
+          else {
+            var startRide = that.props.startRide;
+            startRide(data.href);
+          }
+        }
+      });
+    };
     var that = this;
     util.startMicrophone(function(text) {
       util.getGeolocation(function(coordinates) {
@@ -15,8 +32,7 @@ var MicButton = Eventful.createClass({
             coordinates: coordinates
           },
           success: function(data, status, xhr) {
-            var startRide = that.props.startRide;
-            startRide(data.href);
+            pollForMap(data.requestId);
           }
         });
         console.log(text);

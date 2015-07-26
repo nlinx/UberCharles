@@ -62,6 +62,19 @@ app.get('/authorization', function(req, res) {
   });
 });
 
+app.get('/map', function(req, res) {
+  var request_id = req.query.request_id;
+  console.log(request_id);
+  requestMap(requestId, req.session.token, function(map) {
+    if (map.href) {
+      res.status(200).send(map);
+    }
+    else {
+      res.status(400).send('Map not ready yet');
+    }
+  });
+});
+
 var requestRide = require('./route_handlers/requestRide');
 app.post('/requestride', requestRide);
 
@@ -79,3 +92,4 @@ app.use(errorHandler);
 var server = app.listen(port, function() {
   console.log("Express server listening on %d in %s mode", port, app.settings.env);
 });
+console.log(server.timeout);
