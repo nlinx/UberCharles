@@ -1,6 +1,6 @@
 var config = require('./config');
 var errorHandler = require('./errorHandler');
-// var db = require('./db');
+
 var parser = require('body-parser');
 var redis = require('./redis');
 var OAuth = require('node-oauth');
