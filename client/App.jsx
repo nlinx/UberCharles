@@ -8,3 +8,5 @@ var App = Eventful.createClass({
     );
   }
 });
+
+module.exports = App;

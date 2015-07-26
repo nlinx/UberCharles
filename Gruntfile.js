@@ -3,8 +3,11 @@ module.exports = function(grunt) {
     browserify: {
       build: {
         options: {
-          debug: true,
-          transform: ['reactify']
+          browserifyOptions: {
+            debug: true,
+            transform: ['reactify'],
+            extensions: ['.jsx']
+          }
         },
         files: {
           'server/public/scripts.js': 'client/entrypoint.jsx'

@@ -4,15 +4,16 @@ var errorHandler = require('./errorHandler');
 var parser = require('body-parser');
 var redis = require('./redis');
 var OAuth = require('node-oauth');
+var morgan = require('morgan');
 
 var express = require('express');
 var port = process.env.PORT || 3000;
 
 var app = express();
 
-//I think you can use both? Just pick whichever we need.
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
+app.use(morgan('dev'));
 
 app.use(express.static(__dirname + '/public'));
 
