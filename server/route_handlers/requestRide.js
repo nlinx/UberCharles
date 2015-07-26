@@ -4,8 +4,8 @@ var speechToText = require('../speechToText');
 var convertToLatLng = require('../convertToLatLng');
 var scheduleHandler = require('../scheduleHandler');
 
-var pollForMap = function(uberResponse, token) {
-  requestMap(uberResponse.request_id, req.session.token, function(map) {
+var pollForMap = function(requestId, token) {
+  requestMap(requestId, token, function(map) {
     if (map.href) {
       res.send(map);
     }
