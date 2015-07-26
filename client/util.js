@@ -9,10 +9,14 @@ var getGeolocation = function(cb) {
   }
 };
 
-var startMicrophone = function(cb) {
+var startMicrophone = function(setMessage, cb) {
   var recognition = new webkitSpeechRecognition();
+  recognition.onstart = function() {
+    setMessage('I\'m listening...');
+  };
   recognition.lang = "en-GB";
   recognition.onresult = function(event) {
+    setMessage('Certainly. Searching for a car as we speak...');
     var result = event.results[0][0];
     cb({
       transcript: result.transcript,
