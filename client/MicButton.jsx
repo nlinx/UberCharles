@@ -23,7 +23,7 @@ var MicButton = Eventful.createClass({
             } else if (data === '') {
               util.speak('Incorrect information was stated. Please try again.')
             } else {
-              util.speak('My name is not Chiles. I am Sir Charles the Third of Wales, half brother of the Duke of England and son of the Bishop of Saint Petersberg');
+              util.speak('My name is not Chiles you idiot.');
             }
           }
         });
