@@ -20,7 +20,7 @@ var pollForMap = function(requestId, token, callback) {
 module.exports = function(req, res, callback) {
   console.log('token is: ', req.session.token);
   //convert destination to end longitude and latitude with nathans function
-  if (req.body.text.indexOf('Charles') === -1) {
+  if (req.body.text.indexOf('Charles') === -1 && req.body.text.indexOf('chiles') === -1) {
     return res.send('Charles did not answer');
   }
 
@@ -37,9 +37,9 @@ module.exports = function(req, res, callback) {
         endCoordinates = coordinates;
         console.log('endCoordinates', endCoordinates);
         if (userRequest.time === 0) {
-          requestRide(req.session.token, 'uberBlack', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
+          requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
             console.log(uberResponse);
-            res.send({request_id: uberResponse.request_id});
+            res.send({requestId: uberResponse.request_id});
             // pollForMap(uberResponse.request_id, req.session.token, function(map) {
               // res.send(map);
             // });

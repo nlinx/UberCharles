@@ -49,7 +49,7 @@ app.get('/authorization', function(req, res) {
     'client_secret': config.UBER_SECRET,
     'client_id': config.UBER_CLIENT_ID,
     'grant_type': 'authorization_code',
-    'redirect_uri': 'https://ubercharles.herokuapp.com/authorization',
+    'redirect_uri': 'http://localhost:3000/authorization',
     'code': authorizationCode
   })
   .end(function(err, response) {
@@ -63,14 +63,15 @@ app.get('/authorization', function(req, res) {
 });
 
 app.get('/map', function(req, res) {
-  var request_id = req.query.request_id;
-  console.log(request_id);
+  console.log(req.query);
+  var requestId = req.query.request_id;
+  console.log(requestId);
   requestMap(requestId, req.session.token, function(map) {
     if (map.href) {
-      res.status(200).send(map);
+      res.status(200).send({success: true, map: map});
     }
     else {
-      res.status(400).send('Map not ready yet');
+      res.status(200).send({success: false, map: null});
     }
   });
 });

@@ -10,7 +10,8 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'server/public/scripts.js': 'client/entrypoint.jsx'
+          'server/public/scripts.js': 'client/entrypoint.jsx',
+          'extension/main.js': 'client/entrypoint.jsx'
         }
       }
     },
