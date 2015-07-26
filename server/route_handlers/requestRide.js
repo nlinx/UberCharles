@@ -11,7 +11,7 @@ var pollForMap = function(requestId, token, callback) {
     }
     else {
       scheduleHandler.minutes(0.25, function() {
-        pollForMap(uberResponse, token);
+        pollForMap(requestId, token, callback);
       });
     }
   });
