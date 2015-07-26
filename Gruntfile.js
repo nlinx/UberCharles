@@ -32,5 +32,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask('build',['browserify:build']);
-  grunt.registerTask('deploy',['build', 'nodemon']);
+  grunt.registerTask('deploy',['browserify:build', 'nodemon']);
 };
