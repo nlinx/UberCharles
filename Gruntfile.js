@@ -16,11 +16,18 @@ module.exports = function(grunt) {
         files: ['client/**/*'],
         tasks: ['build']
       }
+    },
+    nodemon: {
+      dev: {
+        script: 'server/server.js'
+      }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask('build',['browserify:build']);
+  grunt.registerTask('serve',['nodemon']);
 };

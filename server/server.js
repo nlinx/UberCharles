@@ -13,7 +13,7 @@ var app = express();
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/public'));
 
 //error handling middleware applied last
 app.use(errorHandler);
