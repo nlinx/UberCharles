@@ -4,10 +4,10 @@ var speechToText = require('../speechToText');
 var convertToLatLng = require('../convertToLatLng');
 var scheduleHandler = require('../scheduleHandler');
 
-var pollForMap = function(requestId, token) {
+var pollForMap = function(requestId, token, callback) {
   requestMap(requestId, token, function(map) {
     if (map.href) {
-      res.send(map);
+      callback(map);
     }
     else {
       scheduleHandler.minutes(0.25, function() {
@@ -39,14 +39,18 @@ module.exports = function(req, res, callback) {
         if (userRequest.time === 0) {
           requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
             console.log(uberResponse);
-            pollForMap(uberResponse.request_id, req.session.token);
+            pollForMap(uberResponse.request_id, req.session.token, function(map) {
+              res.send(map);
+            });
           });
         }
         else {
           scheduleHandler.minutes(userRequest.time, function() {
             requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
               console.log(uberResponse);
-              pollForMap(uberResponse.request_id, req.session.token);
+              pollForMap(uberResponse.request_id, req.session.token, function(map) {
+                res.send(map);
+              });
             });
           });
         }
