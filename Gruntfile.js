@@ -7,7 +7,7 @@ module.exports = function(grunt) {
           transform: ['reactify']
         },
         files: {
-          'server/public/scripts.js': 'client/App.jsx'
+          'server/public/scripts.js': 'client/entrypoint.jsx'
         }
       }
     },

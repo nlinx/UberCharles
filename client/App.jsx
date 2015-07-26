@@ -8,5 +8,3 @@ var App = Eventful.createClass({
     );
   }
 });
-
-React.render(<App />, document.body);
