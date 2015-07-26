@@ -84,7 +84,7 @@ app.get('/rideTest', function(req, res) {
 });
 
 var requestRide = require('./route_handlers/requestRide');
-app.get('/requestride', requestRide);
+app.post('/requestride', requestRide);
 
 //error handling middleware applied last
 app.use(errorHandler);
