@@ -66,7 +66,7 @@ var App = Eventful.createClass({
     return (
       <div>
         <div className='container-default'>
-          <MicButton loadingFunc={this.loading} message={this.state.message} setMessage={this.setMessage} notLoadingFunc={this.notLoading} cancelFunc={this.cancelable} notCancelFunc={this.notCancelable} startRide={this.startRide}/>
+          <MicButton loadingFunc={this.loading} cancelable={this.state.cancelable} message={this.state.message} setMessage={this.setMessage} notLoadingFunc={this.notLoading} cancelFunc={this.cancelable} notCancelFunc={this.notCancelable} startRide={this.startRide}/>
           <CancelButton requestId={this.state.requestId} setMessage={this.setMessage} notCancelFunc={this.notCancelable} stopRide={this.stopRide} cancelable={this.state.cancelable}/>
           <div>
             <LoadingGif loading={this.state.loading}/>

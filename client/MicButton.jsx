@@ -82,7 +82,13 @@ var MicButton = Eventful.createClass({
     });
   },
   render: function() {
-    return <div><div className="gn" onClick={this.clickHandler}><div className="mc"></div></div>{this.props.message}</div>
+    if (this.props.cancelable) {
+      var newClassName = "gn " + "notVisible";
+    }
+    else {
+      newClassName = "gn";
+    }
+    return <div><div className={newClassName} onClick={this.clickHandler}><div className="mc"></div></div>{this.props.message}</div>
   }
 });
 
