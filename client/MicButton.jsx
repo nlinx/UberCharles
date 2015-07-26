@@ -9,14 +9,14 @@ var MicButton = Eventful.createClass({
       util.getGeolocation(function(coordinates) {
         $.ajax({
           url: '/requestride',
-          type: "POST",
+          type: 'POST',
           data: {
             text: text.transcript,
             coordinates: coordinates
           },
           success: function(data, status, xhr) {
             var startRide = that.props.startRide;
-            startRide(data.href);
+            startRide(data.href, data.request_id);
           }
         });
         console.log(text);

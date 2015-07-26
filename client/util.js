@@ -22,7 +22,39 @@ var startMicrophone = function(cb) {
   recognition.start();
 };
 
+var cancelRide = function(requestId, cb) {
+  $.ajax({
+    url: '/cancelride',
+    type: 'GET',
+    data: {
+      requestId: requestId
+    },
+    success: function(data, status, xhr) {
+      cb();
+    }
+  });
+}
+
+var getEstimate = function(cb) {
+  getGeolocation(function(latLng) {
+    $.ajax({
+      url: '/estimate',
+      type: 'POST',
+      data: {
+        product:'uberBlack',
+        start_latitude: latLng.latitude,
+        start_longitude: latLng.longitude
+      },
+      success: function(data, status, xhr) {
+        cb(data);
+      }
+    });
+  })
+}
 module.exports = {
   getGeolocation: getGeolocation,
-  startMicrophone: startMicrophone
+  startMicrophone: startMicrophone,
+  cancelRide: cancelRide,
+  getEstimate: getEstimate
 };
+
