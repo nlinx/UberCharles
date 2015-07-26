@@ -1,5 +1,6 @@
 body {
   background: #ccc;
+  text-align: center;
 }
 
 .button {
@@ -8,12 +9,10 @@ body {
 
 .buttonMic {
   margin-top: 3%;
-  margin-left: 40%;
 }
 
 .login {
   margin-top: 10%;
-  margin-left: 45%;
 }
 
 .mapFrame {
