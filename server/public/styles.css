@@ -23,5 +23,14 @@ body {
 }
 
 .map-container {
-  text-align: : center;
+  text-align: center;
+}
+
+.loading {
+  height: 30em;
+  width: 30em;
+}
+
+.notLoading {
+  display: none;
 }
