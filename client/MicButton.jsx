@@ -6,6 +6,7 @@ var MicButton = Eventful.createClass({
   clickHandler: function() {
     var that = this;
     util.startMicrophone(function(text) {
+      that.props.loadingFunc();
       util.getGeolocation(function(coordinates) {
         $.ajax({
           url: '/requestride',
@@ -15,6 +16,7 @@ var MicButton = Eventful.createClass({
             coordinates: coordinates
           },
           success: function(data, status, xhr) {
+            that.props.notLoadingFunc();
             var startRide = that.props.startRide;
             console.log(data);
             if (data) {
@@ -23,7 +25,7 @@ var MicButton = Eventful.createClass({
             } else if (data === '') {
               util.speak('Incorrect information was stated. Please try again.')
             } else {
-              util.speak('My name is not Chiles. I am Sir Charles the Third of Wales, half brother of the Duke of England and son of the Bishop of Saint Petersberg');
+              util.speak('My name is not Chiles you idiot.');
             }
           }
         });
