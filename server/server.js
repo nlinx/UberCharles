@@ -62,31 +62,18 @@ app.get('/authorization', function(req, res) {
   });
 });
 
-app.get('/rideTest', function(req, res) {
-  var reqRide = req.query;
-  console.log('token: ', req.session.token);
-  requestRide(req.session.token, reqRide.product, reqRide.start_latitude, reqRide.start_longitude, reqRide.end_latitude, reqRide.end_longitude, function(response) {
-    console.log(response);
-    var requestId = response.request_id;
-    changeRideStatus(requestId, req.session.token, 'accepted', function(map) {
-      console.log(map);
-      requestStatus(requestId, req.session.token, function(status) {
-        console.log(status);
-        cancelRide(requestId, req.session.token, function(canceled) {
-          console.log(canceled);
-          requestStatus(requestId, req.session.token, function(status) {
-            console.log(status);
-          });
-        });
-      });
-    });
-  });
-});
-
 var requestRide = require('./route_handlers/requestRide');
 var cancelRide = require('./route_handlers/cancelRide');
 app.post('/requestride', requestRide);
 app.get('/cancelride', cancelRide);
+
+app.post('/webhook', function(req, res) {
+  console.log(req);
+});
+
+app.get('/webhook', function(req, res) {
+  console.log(req);
+});
 
 //error handling middleware applied last
 app.use(errorHandler);
