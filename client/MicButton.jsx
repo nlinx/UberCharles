@@ -32,15 +32,13 @@ var MicButton = Eventful.createClass({
             var startRide = that.props.startRide;
             startRide(data.map.href);
           }
-        },
-        failure: function() {
-          alert('i suck');
         }
       });
     };
     var that = this;
     util.startMicrophone(function(text) {
       that.props.loadingFunc();
+      that.props.cancelFunc();
       util.getGeolocation(function(coordinates) {
         $.ajax({
           url: '/requestride',
@@ -61,6 +59,7 @@ var MicButton = Eventful.createClass({
             } else if (data === '') {
               util.speak('Incorrect information was stated. Please try again.')
               that.props.notLoadingFunc();
+              that.props.cancelFunc();
             } else if (data.success === false && data.code === 'surge') {
               pollForMap(data.surgeId, true);
               var startRide = that.props.startRide;
@@ -69,6 +68,7 @@ var MicButton = Eventful.createClass({
             }
             else {
               that.props.notLoadingFunc();
+              that.props.cancelFunc();
               util.speak('My name is not Chiles you upstart!');
             }
           }
@@ -78,7 +78,7 @@ var MicButton = Eventful.createClass({
     });
   },
   render: function() {
-    return <div className="buttonMic btn btn-primary" onClick={this.clickHandler}>Text-to-speech</div>;
+    return <div className="buttonMic btn btn-primary" onClick={this.clickHandler}>Tell Charles</div>;
   }
 });
 

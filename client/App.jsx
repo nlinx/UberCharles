@@ -18,7 +18,8 @@ var App = Eventful.createClass({
       requestId: undefined,
       surge: 'Unknown',
       price: 'Unknown',
-      loading: false
+      loading: false,
+      cancelable: false
     };
   },
   startRide: function(url, requestId) {
@@ -49,14 +50,19 @@ var App = Eventful.createClass({
   notLoading: function() {
     this.setState({loading: false});
   },
+  cancelable: function() {
+    this.setState({cancelable: true});
+  },
+  notCancelable: function() {
+    this.setState({cancelable: false});
+  },
 
   render: function() {
     return (
       <div>
-        <Login />
         <div className='container-default'>
-          <MicButton loadingFunc={this.loading} notLoadingFunc={this.notLoading} startRide={this.startRide}/>
-          <CancelButton requestId={this.state.requestId} stopRide={this.stopRide}/>
+          <MicButton loadingFunc={this.loading} notLoadingFunc={this.notLoading} cancelFunc={this.cancelable} notCancelFunc={this.notCancelable} startRide={this.startRide}/>
+          <CancelButton requestId={this.state.requestId} notCancelFunc={this.notCancelable} stopRide={this.stopRide} cancelable={this.state.cancelable}/>
           <div>
             <EstimateButton setEstimates={this.setEstimates} />
           </div>

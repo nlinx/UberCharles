@@ -1,5 +1,4 @@
 body {
-  background: #ccc;
   text-align: center;
 }
 
@@ -33,4 +32,12 @@ body {
 
 .notLoading {
   display: none;
+}
+
+.notVisible {
+  display: none;
+}
+
+.visible {
+  
 }
