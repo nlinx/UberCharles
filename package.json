@@ -1,7 +1,7 @@
 {
-  "name": "uber-or-whip",
+  "name": "uber-charles",
   "version": "1.0.0",
-  "description": "Should you use uber or buy a whip?",
+  "description": "Your personal assistant for Uber",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "uber",
-    "whip"
+    "charles"
   ],
   "author": "UberOrWhip",
   "license": "MIT",
