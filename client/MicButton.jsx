@@ -4,9 +4,17 @@ var util = require('./util');
 
 var MicButton = Eventful.createClass({
   clickHandler: function() {
-    var pollForMap = function(requestId) {
+    var pollForMap = function(requestId, surge) {
+      console.log(requestId);
+      var query;
+      if (surge) {
+        query = '/map?surge_id='
+      }
+      else {
+        query = '/map?request_id=';
+      }
       $.ajax({
-        url: '/map?request_id=' + requestId,
+        url: query + requestId,
         type: "GET",
         success: function(data, status, xhr) {
           console.log('data: ', data);
@@ -14,7 +22,7 @@ var MicButton = Eventful.createClass({
           console.log('xhr: ', xhr);
           if (!data.success) {
             setTimeout(function() {
-              pollForMap(requestId);
+              pollForMap(requestId, surge);
             },5000);
           }
           else {
@@ -39,16 +47,23 @@ var MicButton = Eventful.createClass({
             coordinates: coordinates
           },
           success: function(data, status, xhr) {
-            pollForMap(data.requestId);
-            var startRide = that.props.startRide;
             console.log(data);
-            if (data) {
+            var requestId;
+            if (data.success) {
               util.speak('Your Uber has been called. Please stand by.');
               startRide(data.href, data.request_id);
+              pollForMap(data.requestId, false);
+              var startRide = that.props.startRide;
             } else if (data === '') {
               util.speak('Incorrect information was stated. Please try again.')
-            } else {
-              util.speak('My name is not Chiles. I am Sir Charles the Third of Wales, half brother of the Duke of England and son of the Bishop of Saint Petersberg');
+            } else if (data.success === false && data.code === 'surge') {
+              pollForMap(data.surgeId, true);
+              var startRide = that.props.startRide;
+              util.speak('Uber is surging. Are you ok with that? Please confirm.')
+              window.open(data.url,'1437919483550','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0')
+            }
+            else {
+              util.speak('My name is not Chiles you upstart!');
             }
           }
         });
