@@ -4,6 +4,19 @@ var speechToText = require('../speechToText');
 var convertToLatLng = require('../convertToLatLng');
 var scheduleHandler = require('../scheduleHandler');
 
+var pollForMap = function(uberResponse, token) {
+  requestMap(uberResponse.request_id, req.session.token, function(map) {
+    if (map.href) {
+      res.send(map);
+    }
+    else {
+      scheduleHandler.minutes(0.25, function() {
+        pollForMap(uberResponse, token);
+      });
+    }
+  });
+};
+
 module.exports = function(req, res, callback) {
   console.log('token is: ', req.session.token);
   //convert destination to end longitude and latitude with nathans function
@@ -26,20 +39,14 @@ module.exports = function(req, res, callback) {
         if (userRequest.time === 0) {
           requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
             console.log(uberResponse);
-            requestMap(uberResponse.request_id, req.session.token, function(map) {
-              console.log(map);
-              res.send(map);
-            });
+            pollForMap(uberResponse.request_id, req.session.token);
           });
         }
         else {
           scheduleHandler.minutes(userRequest.time, function() {
             requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
               console.log(uberResponse);
-              requestMap(uberResponse.request_id, req.session.token, function(map) {
-                console.log(map);
-                res.send(map);
-              });
+              pollForMap(uberResponse.request_id, req.session.token);
             });
           });
         }
