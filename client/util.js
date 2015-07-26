@@ -22,7 +22,22 @@ var startMicrophone = function(cb) {
   recognition.start();
 };
 
+var cancelRide = function(requestId, cb) {
+  $.ajax({
+    url: '/cancelride',
+    type: 'GET',
+    data: {
+      requestId: requestId
+    },
+    success: function(data, status, xhr) {
+      cb();
+    }
+  });
+}
+
 module.exports = {
   getGeolocation: getGeolocation,
-  startMicrophone: startMicrophone
+  startMicrophone: startMicrophone,
+  cancelRide: cancelRide
 };
+
