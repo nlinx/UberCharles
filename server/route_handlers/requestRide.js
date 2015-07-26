@@ -1,4 +1,5 @@
 var requestRide = require('../uber_queries/requestRide');
+var requestMap = require('../uber_queries/requestMap');
 var speechToText = require('../speechToText');
 var convertToLatLng = require('../convertToLatLng');
 var scheduleHandler = require('../scheduleHandler');
@@ -25,12 +26,18 @@ module.exports = function(req, res, callback) {
         if (userRequest.time === 0) {
           requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
             console.log(uberResponse);
+            requestMap(uberResponse.request_id, req.session.token, function(map) {
+              res.send(map);
+            });
           });
         }
         else {
           scheduleHandler.minutes(userRequest.time, function() {
             requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
               console.log(uberResponse);
+              requestMap(uberResponse.request_id, req.session.token, function(map) {
+                res.send(map);
+              });
             });
           });
         }
