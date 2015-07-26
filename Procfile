@@ -1,1 +1,1 @@
-web: grunt deploy
+web: node server/server.js
