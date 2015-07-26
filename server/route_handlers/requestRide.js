@@ -27,6 +27,7 @@ module.exports = function(req, res, callback) {
           requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
             console.log(uberResponse);
             requestMap(uberResponse.request_id, req.session.token, function(map) {
+              console.log(map);
               res.send(map);
             });
           });
@@ -36,6 +37,7 @@ module.exports = function(req, res, callback) {
             requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
               console.log(uberResponse);
               requestMap(uberResponse.request_id, req.session.token, function(map) {
+                console.log(map);
                 res.send(map);
               });
             });

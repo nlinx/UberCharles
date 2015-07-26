@@ -4,6 +4,7 @@ var util = require('./util');
 
 var MicButton = Eventful.createClass({
   clickHandler: function() {
+    var that = this;
     util.startMicrophone(function(text) {
       util.getGeolocation(function(coordinates) {
         $.ajax({
@@ -13,8 +14,9 @@ var MicButton = Eventful.createClass({
             text: text.transcript,
             coordinates: coordinates
           },
-          success: function(err, response) {
-            console.log(response);
+          success: function(data, status, xhr) {
+            var startRide = that.props.startRide;
+            startRide(data.href);
           }
         });
         console.log(text);
