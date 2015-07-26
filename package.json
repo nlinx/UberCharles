@@ -4,7 +4,7 @@
   "description": "Your personal assistant for Uber",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Errosr: no test specified\" && exit 1",
     "start": "node server/server.js"
   },
   "repository": {
@@ -37,7 +37,9 @@
     "react-router": "^0.13.3",
     "redis": "^0.12.1",
     "request": "^2.60.0",
-    "superagent": "^1.2.0"
+    "should": "^7.0.2",
+    "superagent": "^1.2.0",
+    "supertest": "^1.0.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

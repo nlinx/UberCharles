@@ -1,6 +1,6 @@
 var request = require('superagent');
 
-module.exports = function(token, product, start_latitude, start_longitude, end_latitude, end_longitude, callback) {
+module.exports = function(token, product, start_latitude, start_longitude, end_latitude, end_longitude, callback, surgeId) {
   var products = {
     'uberTaxi': '3ab64887-4842-4c8e-9780-ccecd3a0391d',
     'uberSuv': '8920cb5e-51a4-4fa4-acdf-dd86c5e18ae0',
@@ -9,15 +9,21 @@ module.exports = function(token, product, start_latitude, start_longitude, end_l
     'uberX': 'a1111c8c-c720-46c3-8534-2fcdd730040d',
   };
 
-  request.post('https://sandbox-api.uber.com/v1/requests')
-  .set('Authorization', 'BEARER ' + token)
-  .send({
+  var rideData = {
     'product_id': products[product],
     'start_latitude': start_latitude,
     'start_longitude': start_longitude,
     'end_latitude': end_latitude,
     'end_longitude': end_longitude,
-  })
+  }
+
+  if (surgeId) {
+    rideData.surge_confirmation_id = surgeId;
+  }
+
+  request.post('https://sandbox-api.uber.com/v1/requests')
+  .set('Authorization', 'BEARER ' + token)
+  .send(rideData)
   .end(function(err, response) {
     callback(response.body);
   });

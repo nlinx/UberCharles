@@ -10,7 +10,8 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'server/public/scripts.js': 'client/entrypoint.jsx'
+          'server/public/scripts.js': 'client/entrypoint.jsx',
+          'extension/main.js': 'client/entrypoint.jsx'
         }
       }
     },
@@ -32,5 +33,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask('build',['browserify:build']);
-  grunt.registerTask('serve',['nodemon']);
+  grunt.registerTask('deploy',['browserify:build', 'nodemon']);
 };

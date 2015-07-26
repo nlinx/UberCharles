@@ -57,19 +57,58 @@ app.get('/authorization', function(req, res) {
     requestProfile(accessToken, function(profile) {
       req.session.user = profile;
       req.session.token = accessToken;
-      res.send(profile);
+      res.redirect('/');
     });
   });
 });
 
-var requestRide = require('./route_handlers/requestRide');
-var cancelRide = require('./route_handlers/cancelRide');
-var estimateRide = require('./route_handlers/estimateRide');
+app.get('/map', function(req, res) {
+  var sendMap = function(requestId, req) {
+    requestMap(requestId, req.session.token, function(map) {
+      if (map.href) {
+        res.status(200).send({success: true, map: map});
+      }
+      else {
+        res.status(200).send({success: false, map: null});
+      }
+    });
+  }
+  var requestId;
+  if (req.query.request_id) {
+    requestId =req.query.request_id;
+    sendMap(requestId, req);
+  } 
+  else if (req.query.surge_id) {
+    redis.get(req.query.surge_id, function(err, requestId) {
+    sendMap(requestId, req);
+    });
+  }
+});
+
+var requestRideHandler = require('./route_handlers/requestRide');
+var cancelRideHandler = require('./route_handlers/cancelRide');
+var estimateRideHandler = require('./route_handlers/estimateRide');
 // var surge = require('./route_handlers/surge');
-app.post('/requestride', requestRide);
-app.get('/cancelride', cancelRide);
-app.post('/estimate', estimateRide);
-// app.get('/surge', surge);
+app.post('/requestride', requestRideHandler);
+app.get('/cancelride', cancelRideHandler);
+app.post('/estimate', estimateRideHandler);
+
+app.get('/surge', function(req, res) {
+  var surgeId = req.query.surge_confirmation_id;
+  console.log('surgeId: ', surgeId);
+  console.log('query: ', req.query);
+  redis.get(surgeId, function(err, rideRequest) {
+    rideRequest = JSON.parse(rideRequest);
+    if (err) throw err;
+    var startCoordinates = rideRequest.startCoordinates;
+    var endCoordinates = rideRequest.endCoordinates;
+    requestRide(req.session.token, rideRequest.product, startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
+      res.sendFile(__dirname + '/public/close.html');
+      console.log(uberResponse);
+      redis.set(surgeId, uberResponse.request_id);
+    }, surgeId);
+  });
+});
 
 app.post('/webhook', function(req, res) {
   console.log(req);
@@ -85,3 +124,4 @@ app.use(errorHandler);
 var server = app.listen(port, function() {
   console.log("Express server listening on %d in %s mode", port, app.settings.env);
 });
+console.log(server.timeout);

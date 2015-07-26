@@ -18,8 +18,14 @@ var App = Eventful.createClass({
       requestId: undefined,
       surge: 'Unknown',
       price: 'Unknown',
-      loading: false
+      loading: false,
+      cancelable: false,
+      message: 'Hi, I\'m Charles. Where are we going today?'
     };
+  },
+  setMessage: function(newMessage) {
+    var that = this;
+    that.setState({message: newMessage});
   },
   startRide: function(url, requestId) {
     this.setState({
@@ -49,21 +55,19 @@ var App = Eventful.createClass({
   notLoading: function() {
     this.setState({loading: false});
   },
+  cancelable: function() {
+    this.setState({cancelable: true});
+  },
+  notCancelable: function() {
+    this.setState({cancelable: false});
+  },
 
   render: function() {
     return (
       <div>
-        <Login />
         <div className='container-default'>
-          <MicButton loadingFunc={this.loading} notLoadingFunc={this.notLoading} startRide={this.startRide}/>
-          <GeoButton />
-          <CancelButton requestId={this.state.requestId} stopRide={this.stopRide}/>
-          <div>
-            <EstimateButton setEstimates={this.setEstimates} />
-          </div>
-          <div>
-            <PricingInfo surge={this.state.surge} price={this.state.price} />
-          </div>
+          <MicButton loadingFunc={this.loading} message={this.state.message} setMessage={this.setMessage} notLoadingFunc={this.notLoading} cancelFunc={this.cancelable} notCancelFunc={this.notCancelable} startRide={this.startRide}/>
+          <CancelButton requestId={this.state.requestId} setMessage={this.setMessage} notCancelFunc={this.notCancelable} stopRide={this.stopRide} cancelable={this.state.cancelable}/>
           <div>
             <LoadingGif loading={this.state.loading}/>
           </div>
