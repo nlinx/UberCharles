@@ -12,15 +12,19 @@ var MicButton = Eventful.createClass({
           console.log('data: ', data);
           console.log('status: ', status);
           console.log('xhr: ', xhr);
-          if (xhr.status === 400) {
+          if (!data.success) {
             setTimeout(function() {
               pollForMap(requestId);
-            },500);
+            },5000);
           }
           else {
+            console.log(data.map.href);
             var startRide = that.props.startRide;
-            startRide(data.href);
+            startRide(data.map.href);
           }
+        },
+        failure: function() {
+          alert('i suck');
         }
       });
     };
