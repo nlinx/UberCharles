@@ -1,5 +1,4 @@
 node_modules
 dump.rdb
-
 server/config.js
 server/public/scripts.js
