@@ -3,13 +3,17 @@ var Eventful = require('eventful-react');
 
 var MicButton = require('./MicButton');
 var GeoButton = require('./GeoButton');
+var Login = require('./Login');
 
 var App = Eventful.createClass({
   render: function() {
     return (
       <div>
-        <MicButton />
-        <GeoButton />
+        <Login />
+        <div className='container-default'>
+          <MicButton />
+          <GeoButton />
+        </div>
       </div>
     );
   }

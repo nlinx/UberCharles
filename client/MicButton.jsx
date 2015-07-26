@@ -7,7 +7,7 @@ var MicButton = Eventful.createClass({
     util.startMicrophone(console.log.bind(console));
   },
   render: function() {
-    return <div className="button" onClick={this.clickHandler}>Text-to-speech</div>;
+    return <div className="buttonMic btn btn-primary" onClick={this.clickHandler}>Text-to-speech</div>;
   }
 });
 
