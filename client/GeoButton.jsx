@@ -7,7 +7,7 @@ var GeoButton = Eventful.createClass({
     util.getGeolocation(console.log.bind(console));
   },
   render: function() {
-    return <div className="button" onClick={this.clickHandler}>Geolocation</div>;
+    return <div className="button btn btn-primary" onClick={this.clickHandler}>Geolocation</div>;
   }
 });
 

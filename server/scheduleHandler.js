@@ -6,13 +6,13 @@ var setJob = {
     //calls the uber
     console.log('now');
   },
-  'minutes': function(minutes, timezone, callback) {
+  'minutes': function(minutes, callback) {
     new CronJob(new Date((new Date()).getTime() + minutes*60000), function() {
       //calls the uber
     console.log('minutes');
     }, null, true, 'America/Los_Angeles');
   },
-  'hours': function(hours, timezone, callback) {
+  'hours': function(hours, callback) {
     new CronJob(new Date((new Date()).getTime() + hours*3600000), function() {
       //calls the uber
     console.log('hours');
@@ -21,6 +21,3 @@ var setJob = {
 };
 
 module.exports = setJob;
-// new CronJob('* * * * *', function() {
-//   //checks every minute for Uber calls that need to be done.
-// }, null, true, 'America/Los_Angeles');
