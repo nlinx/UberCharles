@@ -5,7 +5,7 @@ var convertToLatLng = require('../convertToLatLng');
 var scheduleHandler = require('../scheduleHandler');
 
 module.exports = function(req, res, callback) {
-  console.log('this was called');
+  console.log('token is: ', req.session.token);
   //convert destination to end longitude and latitude with nathans function
   if (req.body.text.indexOf('Charles') === -1) {
     return res.send('Charles did not answer');
