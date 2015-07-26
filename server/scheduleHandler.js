@@ -4,18 +4,18 @@ var CronJob = require('cron').CronJob;
 var setJob = {
   'now': function(callback) {
     //calls the uber
-    console.log('now');
+    callback();
   },
   'minutes': function(minutes, callback) {
     new CronJob(new Date((new Date()).getTime() + minutes*60000), function() {
       //calls the uber
-    console.log('minutes');
+    callback();
     }, null, true, 'America/Los_Angeles');
   },
   'hours': function(hours, callback) {
     new CronJob(new Date((new Date()).getTime() + hours*3600000), function() {
       //calls the uber
-    console.log('hours');
+      callback();
     }, null, true, 'America/Los_Angeles');
   }
 };
