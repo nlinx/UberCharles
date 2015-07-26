@@ -9,7 +9,7 @@ module.exports = function(token, product, start_latitude, start_longitude, end_l
     'uberX': 'a1111c8c-c720-46c3-8534-2fcdd730040d',
   };
 
-  request.post('https://sandbox-api.uber.com/v1/requests')
+  request.post('https://api.uber.com/v1/requests')
   .set('Authorization', 'BEARER ' + token)
   .send({
     'product_id': products[product],
