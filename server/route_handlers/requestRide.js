@@ -38,7 +38,7 @@ module.exports = function(req, res, callback) {
         endCoordinates = coordinates;
         console.log('endCoordinates', endCoordinates);
         if (userRequest.time === 0) {
-          requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
+          requestRide(req.session.token, 'uberBlack', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
             console.log(uberResponse);
             if (uberResponse.errors && uberResponse.errors[0].status === 409) {
               redis.set(uberResponse.meta.surge_confirmation.surge_confirmation_id, JSON.stringify({

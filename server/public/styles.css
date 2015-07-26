@@ -6,10 +6,6 @@ body {
   text-align: center;
 }
 
-.button {
-  margin-top: 3%;
-}
-
 .buttonMic {
   margin-top: 3%;
 }
@@ -49,3 +45,4 @@ body {
 .gn {
   cursor: pointer;
 }
+
