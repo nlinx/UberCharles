@@ -4,7 +4,7 @@
   "description": "Your personal assistant for Uber",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Errosr: no test specified\" && exit 1",
     "start": "node server/server.js"
   },
   "repository": {
