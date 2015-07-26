@@ -21,6 +21,3 @@ var setJob = {
 };
 
 module.exports = setJob;
-// new CronJob('* * * * *', function() {
-//   //checks every minute for Uber calls that need to be done.
-// }, null, true, 'America/Los_Angeles');

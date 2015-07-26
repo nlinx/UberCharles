@@ -62,7 +62,7 @@ app.get('/authorization', function(req, res) {
   });
 });
 
-app.get('/ride', function(req, res) {
+app.get('/rideTest', function(req, res) {
   var reqRide = req.query;
   console.log('token: ', req.session.token);
   requestRide(req.session.token, reqRide.product, reqRide.start_latitude, reqRide.start_longitude, reqRide.end_latitude, reqRide.end_longitude, function(response) {
@@ -82,6 +82,9 @@ app.get('/ride', function(req, res) {
     });
   });
 });
+
+var requestRide = require('./route_handlers/requestRide');
+app.get('/requestride', requestRide);
 
 //error handling middleware applied last
 app.use(errorHandler);
