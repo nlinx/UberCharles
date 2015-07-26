@@ -35,9 +35,26 @@ var cancelRide = function(requestId, cb) {
   });
 }
 
+var getEstimate = function(cb) {
+  getGeolocation(function(latLng) {
+    $.ajax({
+      url: '/estimate',
+      type: 'POST',
+      data: {
+        product:'uberBlack',
+        start_latitude: latLng.latitude,
+        start_longitude: latLng.longitude
+      },
+      success: function(data, status, xhr) {
+        cb(data);
+      }
+    });
+  })
+}
 module.exports = {
   getGeolocation: getGeolocation,
   startMicrophone: startMicrophone,
-  cancelRide: cancelRide
+  cancelRide: cancelRide,
+  getEstimate: getEstimate
 };
 
