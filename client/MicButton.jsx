@@ -4,6 +4,7 @@ var util = require('./util');
 
 var MicButton = Eventful.createClass({
   clickHandler: function() {
+    var that = this;
     var pollForMap = function(requestId, surge) {
       console.log(requestId);
       var query;
@@ -26,6 +27,7 @@ var MicButton = Eventful.createClass({
             },5000);
           }
           else {
+            that.props.notLoadingFunc();
             console.log(data.map.href);
             var startRide = that.props.startRide;
             startRide(data.map.href);
@@ -48,7 +50,6 @@ var MicButton = Eventful.createClass({
             coordinates: coordinates
           },
           success: function(data, status, xhr) {
-            that.props.notLoadingFunc();
             var startRide = that.props.startRide;
             console.log(data);
             var requestId;
@@ -59,6 +60,7 @@ var MicButton = Eventful.createClass({
               var startRide = that.props.startRide;
             } else if (data === '') {
               util.speak('Incorrect information was stated. Please try again.')
+              that.props.notLoadingFunc();
             } else if (data.success === false && data.code === 'surge') {
               pollForMap(data.surgeId, true);
               var startRide = that.props.startRide;
@@ -66,6 +68,7 @@ var MicButton = Eventful.createClass({
               window.open(data.url,'1437919483550','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0')
             }
             else {
+              that.props.notLoadingFunc();
               util.speak('My name is not Chiles you upstart!');
             }
           }

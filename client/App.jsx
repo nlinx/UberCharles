@@ -56,7 +56,6 @@ var App = Eventful.createClass({
         <Login />
         <div className='container-default'>
           <MicButton loadingFunc={this.loading} notLoadingFunc={this.notLoading} startRide={this.startRide}/>
-          <GeoButton />
           <CancelButton requestId={this.state.requestId} stopRide={this.stopRide}/>
           <div>
             <EstimateButton setEstimates={this.setEstimates} />
