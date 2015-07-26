@@ -3,6 +3,9 @@ var Eventful = require('eventful-react');
 var util = require('./util');
 
 var MicButton = Eventful.createClass({
+  getInitialState: function() {
+    return {message: 'Hi, I\'m Charles. Where are we going today?'};
+  },
   clickHandler: function() {
     var that = this;
     var pollForMap = function(requestId, surge) {
@@ -28,6 +31,7 @@ var MicButton = Eventful.createClass({
           }
           else {
             that.props.notLoadingFunc();
+            that.props.setMessage('Are these suitable accomodations?');
             console.log(data.map.href);
             var startRide = that.props.startRide;
             startRide(data.map.href);
@@ -36,7 +40,7 @@ var MicButton = Eventful.createClass({
       });
     };
     var that = this;
-    util.startMicrophone(function(text) {
+    util.startMicrophone(this.props.setMessage, function(text) {
       that.props.loadingFunc();
       that.props.cancelFunc();
       util.getGeolocation(function(coordinates) {
@@ -78,7 +82,7 @@ var MicButton = Eventful.createClass({
     });
   },
   render: function() {
-    return <div><div className="gn" onClick={this.clickHandler}><div className="mc"></div></div>Hi, I'm Charles. Where are we going today?</div>
+    return <div><div className="gn" onClick={this.clickHandler}><div className="mc"></div></div>{this.props.message}</div>
   }
 });
 
