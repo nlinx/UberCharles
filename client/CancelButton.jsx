@@ -6,6 +6,7 @@ var CancelButton = Eventful.createClass({
   clickHandler: function() {
     util.cancelRide(this.props.requestId, this.props.stopRide);
     this.props.notCancelFunc();
+    this.props.hideMap();
     this.props.setMessage('Hi, I\'m Charles. Where are we going today?');
   },
   render: function() {

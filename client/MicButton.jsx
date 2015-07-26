@@ -43,6 +43,7 @@ var MicButton = Eventful.createClass({
     util.startMicrophone(this.props.setMessage, function(text) {
       that.props.loadingFunc();
       that.props.cancelFunc();
+      that.props.hideMap();
       util.getGeolocation(function(coordinates) {
         $.ajax({
           url: '/requestride',
@@ -59,6 +60,7 @@ var MicButton = Eventful.createClass({
               util.speak('Your Uber has been called. Please stand by.');
               startRide(data.href, data.request_id);
               pollForMap(data.requestId, false);
+              that.props.showMap();
               var startRide = that.props.startRide;
             } else if (data === '') {
               util.speak('Incorrect information was stated. Please try again.')
@@ -69,6 +71,7 @@ var MicButton = Eventful.createClass({
               var startRide = that.props.startRide;
               util.speak('Uber is surging. Are you ok with that? Please confirm.')
               window.open(data.url,'1437919483550','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0')
+              that.props.showMaps();
             }
             else {
               that.props.notLoadingFunc();

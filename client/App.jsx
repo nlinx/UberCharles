@@ -20,6 +20,7 @@ var App = Eventful.createClass({
       price: 'Unknown',
       loading: false,
       cancelable: false,
+      showMap: false,
       message: 'Hi, I\'m Charles. Where are we going today?'
     };
   },
@@ -61,18 +62,24 @@ var App = Eventful.createClass({
   notCancelable: function() {
     this.setState({cancelable: false});
   },
+  showMap: function() {
+    this.setState({showMap: true});
+  },
+  hideMap: function() {
+    this.setState({showMap: false});
+  },
 
   render: function() {
     return (
       <div>
         <div className='container-default'>
-          <MicButton loadingFunc={this.loading} message={this.state.message} setMessage={this.setMessage} notLoadingFunc={this.notLoading} cancelFunc={this.cancelable} notCancelFunc={this.notCancelable} startRide={this.startRide}/>
-          <CancelButton requestId={this.state.requestId} setMessage={this.setMessage} notCancelFunc={this.notCancelable} stopRide={this.stopRide} cancelable={this.state.cancelable}/>
+          <MicButton loadingFunc={this.loading} message={this.state.message} setMessage={this.setMessage} notLoadingFunc={this.notLoading} cancelFunc={this.cancelable} notCancelFunc={this.notCancelable} startRide={this.startRide} showMap={this.showMap} hideMap={this.hideMap} />
+          <CancelButton requestId={this.state.requestId} setMessage={this.setMessage} notCancelFunc={this.notCancelable} stopRide={this.stopRide} cancelable={this.state.cancelable} hideMap={this.hideMap}/>
           <div>
             <LoadingGif loading={this.state.loading}/>
           </div>
           <div className='map-container'>
-            <MapFrame  url={this.state.mapUrl}/>
+            <MapFrame showMap={this.state.showMap} url={this.state.mapUrl}/>
           </div>
         </div>
       </div>
