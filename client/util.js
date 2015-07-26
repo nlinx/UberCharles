@@ -51,10 +51,16 @@ var getEstimate = function(cb) {
     });
   })
 }
+
+var speak = function(text) {
+  responsiveVoice.speak(text, "UK English Male");
+}
+
 module.exports = {
   getGeolocation: getGeolocation,
   startMicrophone: startMicrophone,
   cancelRide: cancelRide,
-  getEstimate: getEstimate
+  getEstimate: getEstimate,
+  speak: speak
 };
 
