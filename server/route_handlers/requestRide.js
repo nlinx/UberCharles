@@ -37,7 +37,7 @@ module.exports = function(req, res, callback) {
         endCoordinates = coordinates;
         console.log('endCoordinates', endCoordinates);
         if (userRequest.time === 0) {
-          requestRide(req.session.token, 'uberX', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
+          requestRide(req.session.token, 'uberBlack', startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, function(uberResponse) {
             console.log(uberResponse);
             pollForMap(uberResponse.request_id, req.session.token, function(map) {
               res.send(map);
