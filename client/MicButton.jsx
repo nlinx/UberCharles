@@ -9,10 +9,13 @@ var MicButton = Eventful.createClass({
         url: '/map?request_id=' + requestId,
         type: "GET",
         success: function(data, status, xhr) {
+          console.log('data: ', data);
+          console.log('status: ', status);
+          console.log('xhr: ', xhr);
           if (xhr.status === 400) {
             setTimeout(function() {
               pollForMap(requestId);
-            },5);
+            },500);
           }
           else {
             var startRide = that.props.startRide;
