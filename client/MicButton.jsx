@@ -71,7 +71,7 @@ var MicButton = Eventful.createClass({
               var startRide = that.props.startRide;
               util.speak('Uber is surging. Are you ok with that? Please confirm.')
               window.open(data.url,'1437919483550','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0')
-              that.props.showMaps();
+              that.props.showMap();
             }
             else {
               that.props.notLoadingFunc();
