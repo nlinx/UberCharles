@@ -49,10 +49,11 @@ app.get('/authorization', function(req, res) {
     'client_secret': config.UBER_SECRET,
     'client_id': config.UBER_CLIENT_ID,
     'grant_type': 'authorization_code',
-    'redirect_uri': 'https://localhost:3000/authorization',
+    'redirect_uri': 'http://ubercharles.herokuapp.com/authorization',
     'code': authorizationCode
   })
   .end(function(err, response) {
+    console.log(response);
     var accessToken = response.body.access_token;
     requestProfile(accessToken, function(profile) {
       req.session.user = profile;
