@@ -37,3 +37,7 @@ body {
 .visible {
 
 }
+
+.gn {
+  cursor: pointer;
+}
